@@ -1,30 +1,32 @@
-import React, { memo, useEffect, useState } from "react"
-import myRequest from "@/services"
+import React, { memo, useEffect } from "react"
+import { HomeWrapper } from "./style"
+import HomeBanner from "./cpns/HomeBanner"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchHomeGoodPriceAction } from "@/store/modules/home"
+import SectionHeader from "@/components/Section-Header"
+import SectionRooms from "@/components/Section-rooms"
 
 const Home = memo(() => {
-  const [highScore, setHighScore] = useState({})
+  const { goodPrice } = useSelector((state) => ({
+    goodPrice: state.homeReducer.homeGoodPrice,
+  }))
 
-  // 模拟网络请求
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    myRequest
-      .get({
-        url: "/home/highscore",
-      })
-      .then((res) => {
-        setHighScore(res)
-      })
-  }, [])
+    dispatch(fetchHomeGoodPriceAction())
+  }, [dispatch])
 
   return (
-    <div>
-      <h1>{highScore.title}</h1>
-      <h3>{highScore.subtitle}</h3>
-      <ul>
-        {highScore.list?.map((item) => {
-          return <li key={item.id}>{item.name}</li>
-        })}
-      </ul>
-    </div>
+    <HomeWrapper>
+      <HomeBanner />
+      <div className="content">
+        <div className="goodprice">
+          <SectionHeader title={goodPrice.title} />
+          <SectionRooms list={goodPrice.list} />
+        </div>
+      </div>
+    </HomeWrapper>
   )
 })
 
