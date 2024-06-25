@@ -23,7 +23,7 @@ export const ItemWrapper = styled.div`
     .desc {
       font-size: 12px;
       margin: 10px 0 5px;
-      color: ${(props) => props.descColor};
+      color: ${(props) => props.desccolor};
     }
     .name {
       height: 36px;
