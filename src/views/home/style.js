@@ -7,7 +7,7 @@ export const HomeWrapper = styled.div`
     margin: 0 auto;
   }
 
-  .goodprice {
+  .plus {
     margin-top: 30px;
   }
 `

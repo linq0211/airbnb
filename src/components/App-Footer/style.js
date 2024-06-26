@@ -5,6 +5,7 @@ export const FooterWrapper = styled.div`
   border-top: 1px solid #eee;
   margin-top: 60px;
   .content {
+    min-width: 1032px;
     width: 60%;
     margin: 0 auto;
     .top {
