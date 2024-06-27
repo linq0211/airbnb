@@ -1,21 +1,23 @@
 import React, { memo, useEffect } from "react"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
+
+import { isEmpty } from "@/utils"
+import { fetchHomeDataAction } from "@/store/modules/home"
 import { HomeWrapper } from "./style"
 import HomeBanner from "./cpns/HomeBanner"
-import { shallowEqual, useDispatch, useSelector } from "react-redux"
-import { fetchHomeDataAction } from "@/store/modules/home"
 import HomeSectionV1 from "./cpns/HomeSectionV1"
-import SectionHeader from "@/components/Section-Header"
-import SectionRooms from "@/components/Section-rooms"
 import HomeSectionV2 from "./cpns/HomeSectionV2"
-import { isEmpty } from "@/utils"
+import HomeSectionV3 from "./cpns/HomeSectionV3"
+import HomeLongFor from "./cpns/HomeLongFor"
 
 const Home = memo(() => {
-  const { goodPrice, highScore, discount, hotrecommend, plus } = useSelector(
+  const { goodPrice, highScore, discount, hotRecommend, longFor, plus } = useSelector(
     (state) => ({
       goodPrice: state.homeReducer.homeGoodPrice,
       highScore: state.homeReducer.homeHighScore,
       discount: state.homeReducer.homeDiscount,
-      hotrecommend: state.homeReducer.homeHotRecommend,
+      hotRecommend: state.homeReducer.homeHotRecommend,
+      longFor: state.homeReducer.homeLongFor,
       plus: state.homeReducer.homePlus,
     }),
     shallowEqual
@@ -35,16 +37,11 @@ const Home = memo(() => {
         {/* 发送请求修改数据后传入的props发送变化，会重新渲染一次 */}
 
         {!isEmpty(discount) && <HomeSectionV2 data={discount} />}
-        {!isEmpty(hotrecommend) && <HomeSectionV2 data={hotrecommend} />}
+        {!isEmpty(hotRecommend) && <HomeSectionV2 data={hotRecommend} />}
+        {!isEmpty(longFor) && <HomeLongFor data={longFor} />}
         {!isEmpty(goodPrice) && <HomeSectionV1 data={goodPrice} />}
         {!isEmpty(highScore) && <HomeSectionV1 data={highScore} />}
-
-        {!isEmpty(plus) && (
-          <div className="plus">
-            <SectionHeader title={plus.title} subtitle={plus.subtitle} />
-            <SectionRooms list={plus.list?.slice(0, 5)} itemWidth="20%" />
-          </div>
-        )}
+        {!isEmpty(plus) && <HomeSectionV3 data={plus} />}
       </div>
     </HomeWrapper>
   )

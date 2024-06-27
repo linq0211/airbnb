@@ -1,10 +1,8 @@
 import styled from "styled-components"
 
 export const SectionTabsWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
   .item {
-    flex-basis: 120px;
+    flex-basis: 200px;
     box-sizing: border-box;
     flex-shrink: 0;
     padding: 14px 16px;
