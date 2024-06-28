@@ -53,9 +53,9 @@ const ScrollView = memo((props) => {
 
   // 在组件挂在完成时，重新设置显示按钮的值
   useEffect(() => {
-    const clientWidth = scrollRef.current.clientWidth
-    const scrollWidth = scrollRef.current.scrollWidth
-    const totalDistance = scrollWidth - clientWidth
+    const clientWidth = scrollRef.current.clientWidth // 展示的滚动区域
+    const scrollWidth = scrollRef.current.scrollWidth // 可滚动的区域
+    const totalDistance = scrollWidth - clientWidth // 插值
 
     totalDistanceRef.current = totalDistance
     setShowRight(totalDistance > 0)
